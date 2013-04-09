@@ -1,0 +1,2 @@
+define(['timer', 'jperf'], function() {
+});
