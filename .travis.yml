@@ -5,3 +5,7 @@ before_script:
   - npm install grunt-cli -g
   - grunt build
 script: grunt travis --verbose
+
+notifications:
+  on_success: change # [always|never|change] default: change
+  on_failure: always # [always|never|change] default: always
