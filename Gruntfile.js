@@ -113,8 +113,11 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-  
   grunt.registerTask('test', ['qunit']);
-  grunt.registerTask('build', ['clean:build', 'requirejs', 'copy', 'clean:postbuild', 'jshint', 'test']);
+
+  // Travis CI task.
+  grunt.registerTask('travis', 'test');
+
+  grunt.registerTask('build', ['clean:build', 'requirejs', 'copy', 'clean:postbuild', 'jshint']);
   grunt.registerTask('default', 'build');
 };
