@@ -3,10 +3,10 @@ define(['jperfproto'], function(jPerfProto) {
     var startTime = 0;
 
     var getTime = function() {
-      if (window.performance.now === undefined)
-        return new Date();
-      else
+      if (typeof window.performance.now == 'function')
         return window.performance.now();
+      else
+        return new Date();
     };
 
     this.start = function() {
