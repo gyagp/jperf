@@ -12,11 +12,12 @@ function sleep(milliseconds) {
 }
 
 test("Timer", function() {
-  t = new window.jPerf.Timer()
-  ok(t, "Timer is created")
+  t = new window.jPerf.Timer();
+  ok(t, "Timer is created");
   
-  t.start()
-  sleep(10)
-  d = t.duration()
-  ok(d > 0, "Timer works well")
+  t.start();
+  sleep(10);
+  d = t.duration();
+  console.log(d);
+  ok(d > 7 && d < 13, "Timer works well");
 });

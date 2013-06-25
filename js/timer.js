@@ -2,13 +2,20 @@ define(['jperfproto'], function(jPerfProto) {
   function Timer() {
     var startTime = 0;
 
+    var getTime = function() {
+      if (window.performance.now === undefined)
+        return new Date();
+      else
+        return window.performance.now();
+    };
+
     this.start = function() {
-      this.startTime = new Date();
+      startTime = getTime();
     };
 
     this.duration = function() {
-        var endTime = new Date();
-        return endTime - this.startTime;
+        var endTime = getTime();
+        return endTime - startTime;
     };
   }
   
