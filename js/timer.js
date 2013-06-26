@@ -1,20 +1,14 @@
-define(['jperfproto'], function(jPerfProto) {
+define(['jperfproto', 'relativetime'], function(jPerfProto, RelativeTime) {
   function Timer() {
     var startTime = 0;
-
-    var getTime = function() {
-      if (typeof window.performance == 'object' && typeof window.performance.now == 'function')
-        return window.performance.now();
-      else
-        return new Date();
-    };
+    var rt = new jPerfProto.RelativeTime();
 
     this.start = function() {
-      startTime = getTime();
+      startTime = rt.now();
     };
 
     this.duration = function() {
-        var endTime = getTime();
+        var endTime = rt.now();
         return endTime - startTime;
     };
   }
