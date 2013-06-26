@@ -1,7 +1,3 @@
-test("window.jPerf", function() {
-  ok(window.jPerf, "jPerf object created");
-});
-
 function sleep(milliseconds) {
   var start = new Date().getTime();
   for (var i = 0; i < 1e7; i++) {
@@ -11,13 +7,22 @@ function sleep(milliseconds) {
   }
 }
 
+test("window.jPerf", function() {
+  ok(window.jPerf, "jPerf object created");
+});
+
+test("RelativeTime", function() {
+  rt = new jPerf.RelativeTime();
+  t = rt.now();
+  ok(t, "RelativeTime works well");
+});
+
 test("Timer", function() {
-  t = new window.jPerf.Timer();
+  t = new jPerf.Timer();
   ok(t, "Timer is created");
   
   t.start();
   sleep(10);
   d = t.duration();
-  console.log(d);
   ok(d > 7 && d < 13, "Timer works well");
 });
