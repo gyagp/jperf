@@ -1,0 +1,57 @@
+<head>
+  <title>Sample - CSSFPSMeter</title>
+  <script type="text/javascript" src="../dist/jperf.js"></script>
+</head>
+
+<script>
+  window.onload = function() {
+    var WIDTH = 800;
+    var HEIGHT = 600;
+    var NUMBER = 40;
+    var blocks = [];
+
+    // Create div to show CSS FPS
+    var CSSFPSElement = document.createElement("div");
+    var style = "float:left; width:800px; height:30px: color:red;";
+    CSSFPSElement.setAttribute("style", style);
+    CSSFPSElement.innerHTML = 'Recent FPS: 0, Average FPS: 0';
+    document.body.appendChild(CSSFPSElement);
+    
+    // Create a heavy CSS test
+    var blocksElement = document.createElement("div");
+    blocksElement.style.width = WIDTH;
+    blocksElement.style.height = HEIGHT;
+    document.body.appendChild(blocksElement);
+    
+    for (var i = 0; i < NUMBER * NUMBER; i++) {
+      var div = document.createElement("div");
+      var style = "-webkit-transition:all 0.5s linear; float:left; width:" + WIDTH / NUMBER + "px; height:" + HEIGHT / NUMBER + "px; background:black;";
+      div.setAttribute("style", style);
+      blocksElement.appendChild(div);
+      blocks.push(div);
+    }
+  
+    setInterval(
+      function() {
+        for(var i = 0; i < blocks.length; i++) {
+          r = Math.round(Math.random() * 255);
+          g = Math.round(Math.random() * 255);
+          b = Math.round(Math.random() * 255);
+          blocks[i].style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+        }
+      },
+      500
+    );
+
+    // Start CSSFPSMeter
+    var CSSFPSmeter = new window.jPerf.CSSFPSMeter();
+    CSSFPSmeter.start();
+    document.addEventListener("CSSFPSReport",
+      function(event) {
+        CSSFPSElement.innerHTML = 'Recent FPS: ' + event.recentFPS + ', Average FPS: ' + event.averageFPS;
+      },
+      false
+    );
+  }
+    
+</script>

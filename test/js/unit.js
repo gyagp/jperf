@@ -26,3 +26,13 @@ test("Timer", function() {
   d = t.duration();
   ok(d > 7 && d < 13, "Timer works well");
 });
+
+test("CSSFPSMeter", function() {
+  meter = new jPerf.CSSFPSMeter();
+  ok(meter, "CSSFPSMeter works well");
+});
+
+test("VideoFPSMeter", function() {
+  meter = new jPerf.VideoFPSMeter();
+  ok(meter, "VideoFPSMeter works well");
+});

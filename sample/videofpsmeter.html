@@ -1,0 +1,39 @@
+<head>
+  <title>Sample - VideoFPSMeter</title>
+  <script type="text/javascript" src="../dist/jperf.js"></script>
+</head>
+
+<script>
+  window.onload = function() {
+    // Create div to show video FPS
+    var videoFPSElement = document.createElement("div");
+    var style = "float:left; width:800px; height:30px: color:red;";
+    videoFPSElement.setAttribute("style", style);
+    videoFPSElement.innerHTML = 'Recent FPS: 0, Average FPS: 0';
+    document.body.appendChild(videoFPSElement);
+
+    // Create a video test
+    var videoElement = document.createElement("video");
+    videoElement.setAttribute("id", "video");
+    videoElement.setAttribute("autoplay", true);
+    videoElement.setAttribute("loop", true);
+    videoElement.setAttribute("controls", true);
+    document.body.appendChild(videoElement);
+    var sourceElement = document.createElement("source");
+    sourceElement.setAttribute("id", "webm");
+    sourceElement.setAttribute("src", "http://media.w3.org/2010/05/sintel/trailer.webm");
+    sourceElement.setAttribute("type", "video/webm");
+    videoElement.appendChild(sourceElement);
+    
+    // Start FPSMeter
+    var videoFPSmeter = new window.jPerf.VideoFPSMeter(videoElement);
+    videoFPSmeter.start();
+    document.addEventListener("VideoFPSReport",
+      function(event) {
+        videoFPSElement.innerHTML = 'Recent FPS: ' + event.recentFPS + ', Average FPS: ' + event.averageFPS;
+      },
+      false
+    );
+  };
+  
+</script>

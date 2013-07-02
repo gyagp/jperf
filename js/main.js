@@ -1,2 +1,2 @@
-define(['timer', 'jperf'], function() {
+define(['jperf', 'timer', 'cssfpsmeter', 'videofpsmeter'], function() {
 });
