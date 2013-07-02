@@ -7,7 +7,7 @@ define(['jperfproto', 'singletonify'], function(jPerfProto, singletonify) {
       function fromDate() {
         return new Date();
       }
-	  
+    
       function fromPerformance() {
         return window.performance.now();
       }
