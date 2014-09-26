@@ -15,7 +15,7 @@ define(['jperfproto'], function(jPerfProto) {
 
     var reportFPS = function(eventName) {
       var event = document.createEvent("Event");
-      event.initEvent(eventName, true, true); 
+      event.initEvent(eventName, true, true);
       event.recentFPS = recentFPS;
       event.averageFPS = averageFPS;
       document.dispatchEvent(event);
@@ -45,7 +45,7 @@ define(['jperfproto'], function(jPerfProto) {
         startTime = rt.now();
         storeValue();
       };
-      
+
       if (!ref) {
         // Create a simple CSS animation
         ref = document.createElement("div");
@@ -58,7 +58,7 @@ define(['jperfproto'], function(jPerfProto) {
         var s = document.createElement('style');
         s.innerHTML = keyframes;
         document.body.appendChild(s);
-        
+
         // Report fps
         intervalID = setInterval(
           function () {
@@ -68,23 +68,23 @@ define(['jperfproto'], function(jPerfProto) {
               elapsedIteration = rt.now() - startTime;
               framesTotal += framesIteration;
               elapsedTotal += elapsedIteration;
-  
-              recentFPS = Math.round(framesIteration * 100000 / elapsedIteration) / 100;
-              averageFPS = Math.round(framesTotal * 100000 / elapsedTotal) / 100;
+
+              recentFPS = Math.min(Math.round(framesIteration * 100000 / elapsedIteration) / 100, 60.00);
+              averageFPS = Math.min(Math.round(framesTotal * 100000 / elapsedTotal) / 100, 60.00);
               reportFPS("CSSFPSReport");
 
             } else {
               skippedNumber++;
             }
-            
+
             startIteration();
           },
           interval);
-        
+
         startIteration();
       }
     };
-    
+
     this.stop = function() {
       cancelAnimationFrame(frameID);
       frameID = null;
@@ -96,7 +96,7 @@ define(['jperfproto'], function(jPerfProto) {
     if (autoStart)
       this.start();
   }
-  
+
   jPerfProto.CSSFPSMeter = CSSFPSMeter;
 
   return CSSFPSMeter;

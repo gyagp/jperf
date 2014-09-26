@@ -1,4 +1,4 @@
-// Usage is simple, just call start() and stop(). And it also supports pause, play in video controller. 
+// Usage is simple, just call start() and stop(). And it also supports pause, play in video controller.
 // States: start, running, pause, stop
 
 define(['jperfproto'], function(jPerfProto) {
@@ -18,7 +18,7 @@ define(['jperfproto'], function(jPerfProto) {
 
     var reportFPS = function(eventName) {
       var event = document.createEvent("Event");
-      event.initEvent(eventName, true, true); 
+      event.initEvent(eventName, true, true);
       event.recentFPS = recentFPS;
       event.averageFPS = averageFPS;
       document.dispatchEvent(event);
@@ -46,7 +46,7 @@ define(['jperfproto'], function(jPerfProto) {
     var pauseHandler = function(event) {
       console.log(event.type);
       pause();
-    };    
+    };
 
     this.start = function(event) {
       // Common to all meters
@@ -74,8 +74,8 @@ define(['jperfproto'], function(jPerfProto) {
               framesTotal += framesIteration;
               elapsedTotal += elapsedIteration;
 
-              recentFPS = Math.round(framesIteration * 100000 / elapsedIteration) / 100;
-              averageFPS = Math.round(framesTotal * 100000 / elapsedTotal) / 100;
+              recentFPS = Math.min(Math.round(framesIteration * 100000 / elapsedIteration) / 100, 60.00);
+              averageFPS = Math.min(Math.round(framesTotal * 100000 / elapsedTotal) / 100, 60.00);
               reportFPS("VideoFPSReport");
             } else {
               skippedNumber++;
@@ -85,7 +85,7 @@ define(['jperfproto'], function(jPerfProto) {
           },
           interval
         );
-        
+
         startIteration();
         running = 1;
       }
