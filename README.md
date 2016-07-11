@@ -3,6 +3,10 @@ jperf [![Build Status](https://secure.travis-ci.org/gyagp/jperf.png?branch=maste
 
 JavaScript library for performance measurement.
 
+[build]
+npm install -g grunt-cli
+grunt (and you'll see jperf.js in dist/)
+
 
 RelativeTime
 -------------------
@@ -16,6 +20,7 @@ FPSMeter
 -------------
 CSSFPSMeter: It's not straightforward to measure the FPS of CSS transition, transform and animation, and this tool is all for your help.
 
-VideoFPSMeter: Use specific way to report FPS of HTML5 video. 
+VideoFPSMeter: Use specific way to report FPS of HTML5 video.
 
 All meters have same usage model. That is, use autoStart or start() to run the meter, use stop to stop it, and use event listener to get FPS report periodically. Either start() or stop() can be called multiple times without any side effect. See samples for more detail!
+
